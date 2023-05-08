@@ -11,12 +11,12 @@ on:
 
 jobs:
   build:
-    environment:
-      mqttserver: mqtt://mqttserver
-      emurator: http://emurator:3000
     runs-on: ubuntu-latest
     container:
       image: node:14-buster-slim
+    environment:
+      mqttserver: mqtt://mqttserver
+      emurator: http://emurator:3000
     services:
       emurator:
         image: banban525/echonet-lite-kaden-emulator:latest
