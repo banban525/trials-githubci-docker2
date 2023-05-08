@@ -1,5 +1,6 @@
 import mqtt, { IPublishPacket, ISubscriptionGrant } from "mqtt";
 import fetch from "node-fetch";
+import Timeout from 'await-timeout';
 
 
 let mqttServer = "mqtt://localhost"
@@ -18,16 +19,29 @@ test('integration test', () => {
   expect(1+1).toBe(2);
 });
 
-test("connet to mqtt", (done:jest.DoneCallback)=>{
+test("connet to mqtt", async ():Promise<void>=>{
   const mqttBroker = mqttServer;
   const mqttClient = mqtt.connect(mqttBroker);
-  mqttClient.on("connect", ()=>{
-    console.log("connected");
+
+  const timer = new Timeout();
+  try
+  {
+    await Promise.race([
+      new Promise<void>((resolve, rejects)=>{
+        mqttClient.on("connect", ()=>{
+          console.log("connected");
+          mqttClient.end();
+          resolve();
+        });
+      }),
+      timer.set(5000, "timeout")
+    ]);
+  }
+  finally
+  {
     mqttClient.end();
-    done();
-  });
-  
-});
+  }
+}, 10*1000);
 
 
 test("wait for emulator", async ():Promise<void>=>{
