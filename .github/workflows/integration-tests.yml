@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14-buster-slim
-    environment:
-      mqttserver: mqtt://mqttserver
-      emurator: http://emurator:3000
     services:
       emurator:
         image: banban525/echonet-lite-kaden-emulator:latest
@@ -26,3 +23,6 @@ jobs:
     - uses: actions/checkout@v3
     - run: npm ci
     - run: npm run test:integration
+      env:
+        mqttserver: mqtt://mqttserver
+        emurator: http://emurator:3000
