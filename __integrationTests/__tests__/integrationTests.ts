@@ -28,6 +28,9 @@ test("connet to mqtt", async ():Promise<void>=>{
 
   console.log(`mqttClient.connected=${mqttClient.connected}`);
 
+  mqttClient.on("error", (error:Error)=>{
+    console.log(`error:` + error.message);
+  });
 
   const timer = new Timeout();
   try
