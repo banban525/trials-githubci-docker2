@@ -26,6 +26,10 @@ test("connet to mqtt", async ():Promise<void>=>{
     port: 1883
   });
 
+  console.log(`mqttClient=${mqttClient}`);
+  console.log(`mqttClient.connected=${mqttClient.connected}`);
+
+
   const timer = new Timeout();
   try
   {
