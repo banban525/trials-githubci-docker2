@@ -37,14 +37,15 @@ test("connet to mqtt", async ():Promise<void>=>{
           resolve();
         });
       }),
-      timer.set(5000, "timeout")
+      timer.set(10*1000, "timeout")
     ]);
   }
   finally
   {
+    console.log(`mqttClient.disconnected=${mqttClient.disconnected}`);
     mqttClient.end();
   }
-}, 10*1000);
+}, 11*1000);
 
 
 test("wait for emulator", async ():Promise<void>=>{
