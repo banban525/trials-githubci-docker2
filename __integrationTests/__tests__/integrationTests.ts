@@ -21,7 +21,9 @@ test('integration test', () => {
 
 test("connet to mqtt", async ():Promise<void>=>{
   const mqttBroker = mqttServer;
-  const mqttClient = mqtt.connect(mqttBroker);
+  const mqttClient = mqtt.connect(mqttBroker, {
+    port: 1883
+  });
 
   const timer = new Timeout();
   try
