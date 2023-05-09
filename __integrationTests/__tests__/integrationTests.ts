@@ -26,7 +26,6 @@ test("connet to mqtt", async ():Promise<void>=>{
     port: 1883
   });
 
-  console.log(`mqttClient=${mqttClient}`);
   console.log(`mqttClient.connected=${mqttClient.connected}`);
 
 
@@ -46,7 +45,7 @@ test("connet to mqtt", async ():Promise<void>=>{
   }
   finally
   {
-    console.log(`mqttClient.disconnected=${mqttClient.disconnected}`);
+    console.log(`finally mqttClient.connected=${mqttClient.connected}`);
     mqttClient.end();
   }
 }, 11*1000);
