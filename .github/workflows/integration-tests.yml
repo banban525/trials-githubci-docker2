@@ -18,7 +18,7 @@ jobs:
       emurator:
         image: banban525/echonet-lite-kaden-emulator:latest
       mqttserver:
-        image: eclipse-mosquitto:2.0.15
+        image: eclipse-mosquitto
     steps:
     - uses: actions/checkout@v3
     - run: npm ci
