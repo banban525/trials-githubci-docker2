@@ -21,6 +21,7 @@ test('integration test', () => {
 
 test("connet to mqtt", async ():Promise<void>=>{
   const mqttBroker = mqttServer;
+  console.log(`connect to ${mqttBroker}`);
   const mqttClient = mqtt.connect(mqttBroker, {
     port: 1883
   });
