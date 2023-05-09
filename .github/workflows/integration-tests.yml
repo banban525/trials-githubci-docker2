@@ -12,17 +12,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: node:14-buster-slim
     services:
       emurator:
         image: banban525/echonet-lite-kaden-emulator:latest
+        ports:
+          - 3000:3000
       mqttserver:
         image: eclipse-mosquitto
+        ports:
+          - 1883:1883
     steps:
     - uses: actions/checkout@v3
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14.x
+        cache: 'npm'
     - run: npm ci
     - run: npm run test:integration
       env:
-        mqttserver: mqtt://mqttserver
-        emurator: http://emurator:3000
+        mqttserver: mqtt://localhost
+        emurator: http://localhost:3000
